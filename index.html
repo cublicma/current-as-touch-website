@@ -9,6 +9,7 @@
     <meta property="og:image" content="assets/img/teaser_ad_v1.png">
     <title>Current as Touch</title>
     <link rel="stylesheet" href="assets/site.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="969efa77-2f0c-49cd-a7d5-e3fdee38354e"></script>
   </head>
   <body>
     <header class="site-header">
@@ -40,8 +41,8 @@
           </p>
           <p class="affiliation">University of North Carolina at Chapel Hill</p>
           <div class="hero-links" aria-label="Project links">
-            <a class="hero-button" href="https://arxiv.org/abs/2607.03529">arXiv</a>
-            <a class="hero-button" href="https://github.com/cublicma/current-as-touch">GitHub</a>
+            <a class="hero-button" href="https://arxiv.org/abs/2607.03529" data-umami-event="arxiv-click">arXiv</a>
+            <a class="hero-button" href="https://github.com/cublicma/current-as-touch" data-umami-event="github-click">GitHub</a>
           </div>
         </div>
       </section>
@@ -66,7 +67,7 @@
 
       <section id="video" class="section main-video">
         <h2>Overview Video</h2>
-        <video controls preload="metadata" poster="assets/img/teaser_ad_v1.png">
+        <video controls preload="metadata" poster="assets/img/teaser_ad_v1.png" data-video-event="overview-video-play">
           <source src="assets/videos/introduction-3min-web.mp4" type="video/mp4">
         </video>
       </section>
@@ -88,7 +89,7 @@
             </div>
           </div>
           <div class="experiment-media">
-            <video controls preload="metadata" poster="assets/img/grasp-current.jpg">
+            <video controls preload="metadata" poster="assets/img/grasp-current.jpg" data-video-event="foam-cup-video-play">
               <source src="assets/videos/teleop_foam_cup_3x.mp4" type="video/mp4">
             </video>
             <div class="compare">
@@ -109,7 +110,7 @@
             </div>
           </div>
           <div class="experiment-media">
-            <video controls preload="metadata" poster="assets/img/wipe-current.jpg">
+            <video controls preload="metadata" poster="assets/img/wipe-current.jpg" data-video-event="whiteboard-wiping-video-play">
               <source src="assets/videos/teleop_wipe_whiteboard_2x.mp4" type="video/mp4">
             </video>
             <div class="compare">
@@ -130,7 +131,7 @@
             </div>
           </div>
           <div class="experiment-media">
-            <video controls preload="metadata" poster="assets/img/draw-current.jpg">
+            <video controls preload="metadata" poster="assets/img/draw-current.jpg" data-video-event="card-picking-video-play">
               <source src="assets/videos/draw_cards_current_v1.mp4" type="video/mp4">
             </video>
             <div class="compare">
@@ -151,7 +152,7 @@
             </div>
           </div>
           <div class="experiment-media">
-            <video controls preload="metadata" poster="assets/img/pour-current.jpg">
+            <video controls preload="metadata" poster="assets/img/pour-current.jpg" data-video-event="bottle-holding-video-play">
               <source src="assets/videos/hold_cup_2x.mp4" type="video/mp4">
             </video>
             <div class="compare compare-bottle">
@@ -162,5 +163,14 @@
         </article>
       </section>
     </main>
+    <script>
+      document.querySelectorAll("[data-video-event]").forEach((video) => {
+        video.addEventListener("play", () => {
+          if (window.umami) {
+            window.umami.track(video.dataset.videoEvent);
+          }
+        }, { once: true });
+      });
+    </script>
   </body>
 </html>
